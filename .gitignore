@@ -1,0 +1,38 @@
+.import/
+.godot/
+*.import
+.export/
+export_presets.cfg
+export_templates.cfg
+*.escn
+*.escn.import
+*.import
+*.tmp
+*.log
+*.cfg
+*.exe
+*.pdb
+/bin/
+/build/
+.user/
+.vscode/
+.vscode/*
+*.db
+*.import
+# User-specific Godot settings
+export_presets.cfg
+# Godot cache and thumbnails
+.thumbnail
+
+# Windows thumbnail cache
+Thumbs.db
+
+# VSCode settings
+.vscode/
+
+# Credentials / secrets
+credentials.json
+*.key
+*.pem
+
+# Git LFS pointer files are tracked separately via .gitattributes
