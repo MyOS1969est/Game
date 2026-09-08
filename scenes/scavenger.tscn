@@ -1,0 +1,13 @@
+[gd_scene load_steps=1 format=3 uid="scav-0001"]
+
+[node name="Scavenger" type="Node3D"]
+
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SphereMesh {
+    radius = 0.6
+}
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SphereShape3D {
+    radius = 0.6
+}
