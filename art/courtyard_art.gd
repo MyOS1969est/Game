@@ -4,6 +4,8 @@ extends Node3D
 ## verified collision layout or the two courtyard objectives.
 
 const Kit := preload("res://art/mesh_kit.gd")
+const Models := preload("res://art/corner/models.gd")
+const Materials := preload("res://art/corner/materials.gd")
 var breeze: Array[Node3D] = []
 var motes: Array[Node3D] = []
 var time := 0.0
@@ -11,10 +13,12 @@ var time := 0.0
 func _ready() -> void:
 	name = "DioramaArt"
 	process_mode = Node.PROCESS_MODE_PAUSABLE
+	Materials.set_breeze(0.0)
 	_floor_and_inlay()
 	_structure()
 	_service_props()
 	_gardens()
+	_dispenser_border()
 	for i in 12:
 		var mote := Kit.sphere(self, Vector3.ZERO, Vector3.ONE * (0.018 + float(i % 3) * 0.009), Color("#d5d6a3"))
 		mote.material_override = Kit.material(Color("#d5d6a3"), 0.35)
@@ -25,6 +29,7 @@ func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 	time += delta
+	Materials.set_breeze(time)
 	for i in breeze.size():
 		breeze[i].rotation.z = sin(time * 0.8 + float(i) * 1.7) * 0.018
 	for i in motes.size():
@@ -52,9 +57,8 @@ func _floor_and_inlay() -> void:
 			if (x == 0 or x == 11) and z % 3 != 0:
 				continue
 			var at := Vector3(-7.5 + float(x) * 1.37, 0.014, -5.47 + float(z) * 1.36)
-			var shade := float(posmod(x * 7 + z * 3, 5)) * 0.019
-			var tile := Kit.box(self, at, Vector3(1.30, 0.028, 1.29), Color("#bcb493").darkened(shade), 0.018)
-			tile.rotation.y = sin(float(x * 31 + z * 17)) * 0.014
+			var variant := 1 + posmod(x * 7 + z * 3, 4)
+			Models.place(self, "paving_%02d" % variant, at, Vector3.ONE, sin(float(x * 31 + z * 17)) * 0.014)
 	# The old parcel-service seal is inlaid into the floor, not a new game system.
 	var seal := Kit.node(self, "ParcelServiceSeal", Vector3(0.3, 0.032, 1.3))
 	Kit.cylinder(seal, Vector3.ZERO, 1.66, 0.012, Color("#8e9b83"))
@@ -74,8 +78,17 @@ func _floor_and_inlay() -> void:
 		Kit.box(self, Vector3(8.83, -0.45, -5.7 + float(i) * 1.9), Vector3(0.28, 0.51, 1.78), Kit.STONE, 0.07)
 
 func _wall(at: Vector3, size: Vector3) -> void:
-	Kit.box(self, at, size, Kit.IVORY, 0.075)
-	Kit.box(self, at + Vector3.UP * (size.y * 0.5 + 0.015), Vector3(size.x + 0.08, 0.12, size.z + 0.10), Kit.STONE.lightened(0.12), 0.05)
+	# Use panel-sized exports for long dividers so molded edges retain scale.
+	var along_z := size.z > size.x
+	var span := size.z if along_z else size.x
+	var count := maxi(1, roundi(span / 1.96))
+	var segment := span / float(count)
+	for i in count:
+		var offset := -span * 0.5 + segment * (float(i) + 0.5)
+		var root_at := at + Vector3.DOWN * (size.y * 0.5)
+		root_at += Vector3(0, 0, offset) if along_z else Vector3(offset, 0, 0)
+		var scale_to_fit := Vector3(segment / 1.98, size.y / 1.66, (size.x if along_z else size.z) / 0.50)
+		Models.place(self, "wall_worn" if i % 3 == 1 else "wall_panel", root_at, scale_to_fit, PI * 0.5 if along_z else 0.0)
 
 func _structure() -> void:
 	# Keep the repaired topology: same solid rims, dividers and 2.4 m gate opening.
@@ -97,11 +110,7 @@ func _structure() -> void:
 	# Rounded pier bases, banded ceramic columns, and individual arch stones.
 	for x: float in [-7.2, 0.2, 7.3]:
 		_solid("ServicePillar", Vector3(x, 1.65, -5.9), Vector3(1, 3.3, 1))
-		Kit.box(self, Vector3(x, 0.16, -5.9), Vector3(1.35, 0.32, 1.35), Kit.STONE, 0.12)
-		Kit.box(self, Vector3(x, 1.7, -5.9), Vector3(0.96, 2.95, 0.96), Kit.IVORY, 0.18)
-		Kit.box(self, Vector3(x, 2.86, -5.9), Vector3(1.15, 0.19, 1.15), Kit.TEAL, 0.045)
-		Kit.box(self, Vector3(x, 3.13, -5.9), Vector3(1.28, 0.22, 1.28), Kit.IVORY, 0.075)
-		Kit.box(self, Vector3(x, 1.24, -5.39), Vector3(0.34, 0.70, 0.03), Kit.STONE, 0.012)
+		Models.place(self, "service_pillar", Vector3(x, 0, -5.9))
 	Kit.arch(self, Vector3(3.75, 2.93, -5.9), Vector2(3.54, 1.35), 0.35, 0.86, Kit.IVORY)
 	var badge := Kit.node(self, "ServiceSeal", Vector3(3.75, 3.72, -5.35))
 	Kit.cylinder(badge, Vector3.ZERO, 0.48, 0.10, Kit.TEAL).rotation.x = PI * 0.5
@@ -160,24 +169,48 @@ func _crate(at: Vector3, size: float, angle: float) -> void:
 func _garden(at: Vector3, size: float, index: int) -> void:
 	var patch := Kit.node(self, "FernBed", at)
 	patch.rotation.y = float(index) * 1.7
-	Kit.sphere(patch, Vector3(0, 0.015, 0), Vector3(size * 1.95, 0.11, size * 1.35), Color("#58694c"))
+	Kit.sphere(patch, Vector3(0, 0.015, 0), Vector3(size * 1.95, 0.11, size * 1.35), Color("#58694c")).material_override = Materials.get_material("Soil")
 	for i in 3:
 		var angle := float(i) * 2.4
 		var spot := Vector3(sin(angle) * size * 0.48, 0.07, cos(angle) * size * 0.34)
 		var plant := Kit.node(patch, "Fronds", spot)
-		if i == 1:
-			Kit.broadleaf(plant, Vector3.ZERO, size * 0.73, Kit.LEAF.lightened(0.1))
-		else:
-			Kit.fern(plant, Vector3.ZERO, size * (0.67 + float(i) * 0.12), Kit.LEAF.lightened(float(index % 3) * 0.06))
+		var species := "broadleaf" if i == 1 else "fern"
+		Models.place(plant, "%s_%02d" % [species, 1 + index % 2], Vector3.ZERO, Vector3.ONE * size * (0.95 if i == 1 else 1.10))
 		breeze.append(plant)
 	for i in 3:
 		var p := Vector3(sin(float(i * 7 + index)) * size * 0.7, 0.09, cos(float(i * 4 + index)) * size * 0.48)
-		Kit.sphere(patch, p, Vector3(0.31, 0.21, 0.28), Kit.STONE.darkened(0.14))
+		Kit.sphere(patch, p, Vector3(0.31, 0.21, 0.28), Kit.STONE.darkened(0.14)).material_override = Materials.get_material("Stone")
 	if index % 3 == 0:
 		for i in 3:
 			var p := Vector3(-0.23 + float(i) * 0.2, 0, 0.15)
 			Kit.rod(patch, p, p + Vector3.UP * (0.3 + float(i % 2) * 0.15), 0.017, Kit.LEAF)
 			Kit.sphere(patch, p + Vector3.UP * (0.33 + float(i % 2) * 0.15), Vector3(0.13, 0.11, 0.13), Color("#d9ae64"))
+
+func _dispenser_border() -> void:
+	# More deliberate planting at the first art focus, with a clear approach in
+	# front of the machine. These meshes remain outside the existing route lane.
+	for i in 7:
+		var at := Vector3(-8.0 + float(i) * 0.48, 0.03, -2.08 - sin(float(i) * 1.7) * 0.12)
+		var species := "broadleaf" if i % 3 == 0 else "fern"
+		Models.place(self, "%s_%02d" % [species, 1 + i % 2], at, Vector3.ONE * (0.55 + float(i % 3) * 0.10), float(i) * 2.399)
+	# Ivy climbs the wall beside the vessel. Keep the optic and slot unobscured.
+	for i in 7:
+		var at := Vector3(-7.65 + sin(float(i) * 1.8) * 0.16, 0.11 + float(i) * 0.14, -2.23)
+		Models.place(self, "broadleaf_02", at, Vector3.ONE * 0.24, float(i))
+	# A low, rough planter anchors the corner without blocking the approach.
+	Kit.box(self, Vector3(-8.09, 0.13, -1.11), Vector3(0.73, 0.26, 1.13), Kit.STONE, 0.085).material_override = Materials.get_material("Stone")
+	Models.place(self, "fern_02", Vector3(-8.09, 0.26, -1.11), Vector3.ONE * 0.78)
+	# A small upper-left branch produces real dappled shadows at the dispenser.
+	var branch := Kit.node(self, "ServiceCanopy", Vector3(-8.9, 3.85, -0.8))
+	Kit.rod(branch, Vector3.ZERO, Vector3(1.45, 0.40, -0.70), 0.085, Color("#61563e"), 0.035).material_override = Materials.get_material("Bark")
+	for i in 6:
+		var at := Vector3(float(i) * 0.27, 0.20 + float(i) * 0.045, -0.1 - float(i % 3) * 0.26)
+		Models.place(branch, "broadleaf_01", at, Vector3.ONE * 0.85, float(i) * 2.399)
+
+	# Fine scattered leaves and roots suggest growth without coating every tile.
+	for i in 10:
+		var at := Vector3(-7.70 + float(i % 4) * 0.32, 0.027, 0.36 + float(i / 4) * 0.36)
+		Models.place(self, "broadleaf_01", at, Vector3(0.10, 0.04, 0.10), float(i) * 2.399)
 
 func _tree(at: Vector3, size: float, angle: float) -> void:
 	var root := Kit.node(self, "CourtyardTree", at)

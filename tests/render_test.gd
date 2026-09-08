@@ -29,11 +29,14 @@ func _run() -> void:
 		return
 	var output := "user://courtyard.png"
 	var showcase := false
+	var corner_study := false
 	for argument in OS.get_cmdline_user_args():
 		if argument.begins_with("--screenshot="):
 			output = argument.trim_prefix("--screenshot=")
 		if argument == "--showcase":
 			showcase = true
+		if argument == "--corner-study":
+			corner_study = true
 	var packed := load("res://main.tscn") as PackedScene
 	var game := packed.instantiate()
 	root.add_child(game)
@@ -42,11 +45,43 @@ func _run() -> void:
 	if not await capture(output):
 		quit(1)
 		return
+	var camera := game.get_node("Camera") as Camera3D
+	var player := game.get_node("Player") as CharacterBody3D
+	var original_camera := camera.transform
+	var original_size := camera.size
+	if corner_study:
+		# A clearly separate art-review camera; the normal play camera was
+		# captured above and remains unchanged in the actual game.
+		game.hud.visible = false
+		camera.size = 6.8
+		var subject := Vector3(-6.35, 1.10, -0.75)
+		camera.position = subject + Vector3(3.5, 3.0, 6.0)
+		camera.look_at(subject)
+		player.position = Vector3(-4.85, 0.1, 0.85)
+		player.velocity = Vector3.ZERO
+		await frames(8)
+		if not await capture(output.get_basename() + "-corner.png"):
+			quit(1)
+			return
+		var motion_dir := output.get_base_dir().path_join("courtyard-motion")
+		DirAccess.make_dir_recursive_absolute(motion_dir)
+		for index in 48:
+			if index % 16 == 0:
+				print("CORNER MOTION: frame ", index, " / 48")
+			if index == 16:
+				game.interact_nearest()
+			await frames(3)
+			if not await capture(motion_dir.path_join("frame%03d.png" % index)):
+				quit(1)
+				return
+		if not game.heirloom.is_inspected:
+			push_error("Corner walkthrough did not inspect the dispenser.")
+			quit(1)
+			return
+		if not await capture(output.get_basename() + "-corner-inspected.png"):
+			quit(1)
+			return
 	if showcase:
-		var camera := game.get_node("Camera") as Camera3D
-		var player := game.get_node("Player") as CharacterBody3D
-		var original_camera := camera.transform
-		var original_size := camera.size
 		game.hud.visible = false
 		camera.size = 4.8
 		var subject := player.position + Vector3.UP * 1.0
@@ -76,6 +111,7 @@ func _run() -> void:
 				quit(1)
 				return
 		Input.action_release("move_right")
+	if showcase or corner_study:
 		camera.transform = original_camera
 		camera.size = original_size
 		game.hud.visible = true
@@ -90,6 +126,7 @@ func _run() -> void:
 		await frames(5)
 		game.interact_nearest()
 		await frames(45)
+		player.camera = null
 		Input.action_press("move_forward")
 		await frames(55)
 		Input.action_release("move_forward")

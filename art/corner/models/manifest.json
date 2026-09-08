@@ -1,0 +1,90 @@
+{
+  "generator": "tools/art/build_corner.py",
+  "blender": "4.5.13 LTS",
+  "assets": [
+    {
+      "file": "paving_01.glb",
+      "bytes": 4840,
+      "triangles": 44,
+      "sha256": "942a4aceb3dfc43ce649d207cb6ab6f48ee6986e7d3f18bc46cafec6baefd881"
+    },
+    {
+      "file": "paving_02.glb",
+      "bytes": 4844,
+      "triangles": 44,
+      "sha256": "0f2638225002aafea700e981698da99b38fdc008503b07dbd3de103aaed92974"
+    },
+    {
+      "file": "paving_03.glb",
+      "bytes": 4844,
+      "triangles": 44,
+      "sha256": "9c7baafb8b06556a083cd8a4e2e68f92182fe24efa81a713a0d9056666c1562b"
+    },
+    {
+      "file": "paving_04.glb",
+      "bytes": 4844,
+      "triangles": 44,
+      "sha256": "e932fdd0a5045c603d2c79d83a3129065829b54060d0cfc1a792e4b902fadabd"
+    },
+    {
+      "file": "wall_panel.glb",
+      "bytes": 30236,
+      "triangles": 884,
+      "sha256": "b0cd5baea7ab3cde5973e32d365aa676a067544b562fdd674ee9128210991a0e"
+    },
+    {
+      "file": "wall_worn.glb",
+      "bytes": 32724,
+      "triangles": 932,
+      "sha256": "b3b031fa574f178ce272739bf1cc2286a7d50fbc68e966a28abf0b16f0dc3b1d"
+    },
+    {
+      "file": "service_pillar.glb",
+      "bytes": 42608,
+      "triangles": 1248,
+      "sha256": "13e6f7f5512f2ec533a682c6bb4771ea60a9f4fbcfc92881e26f0812dbfc20c4"
+    },
+    {
+      "file": "dispenser_shell.glb",
+      "bytes": 77852,
+      "triangles": 2350,
+      "sha256": "7be5fb7f2d0fe3c1fb90d4138cffec9d5e65b974f71e685014f219fcba03da4e"
+    },
+    {
+      "file": "dispenser_hardware.glb",
+      "bytes": 87208,
+      "triangles": 2460,
+      "sha256": "481b8c0c7501a5fead3972758e54895c1fca9ee08f22e9e4844097c369e5dd0f"
+    },
+    {
+      "file": "dispenser_vessel.glb",
+      "bytes": 98300,
+      "triangles": 3024,
+      "sha256": "c7127457a053dfdd03076c971277f24d9606d61e9c6b5bf8c96d2f53154fa5fa"
+    },
+    {
+      "file": "fern_01.glb",
+      "bytes": 253728,
+      "triangles": 5684,
+      "sha256": "e50019d3b494ffeb98c3fdb507f4efc31e8e77fc7cba76c43a9055dc0a4c0f9a"
+    },
+    {
+      "file": "fern_02.glb",
+      "bytes": 253736,
+      "triangles": 5684,
+      "sha256": "a2ed1de7b205ec90cb8fb9395608bb09b156b946a5f2d26c70e98a14ed5823da"
+    },
+    {
+      "file": "broadleaf_01.glb",
+      "bytes": 44104,
+      "triangles": 972,
+      "sha256": "e911dea9a33e6e456de237dc1f3fc90ef53432e7e9bab087eba5aa667c5ddfdc"
+    },
+    {
+      "file": "broadleaf_02.glb",
+      "bytes": 44104,
+      "triangles": 972,
+      "sha256": "6cde2f9c94128e06dae31a37a28a8c1baabb615bd9a00a3e6965a68399614489"
+    }
+  ]
+}

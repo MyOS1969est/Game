@@ -1,5 +1,6 @@
 # Project documentation
 
+- [Blender dispenser corner](DISPENSER_CORNER.md): implemented model kit, material controls, Windows Blender workflow, and verification scope.
 - [Courtyard visual target and asset list](COURTYARD_VISUAL_TARGET.md): proposed production art, asset handoff, build order, and review criteria.
 - [Visual target generation prompt](COURTYARD_VISUAL_TARGET_PROMPT.txt): the reproducible base prompt and targeted refinement used for the companion concept.
 - [Diorama art pass](DIORAMA_ART_PASS.md): the current implemented modular art and its verified Godot captures.
