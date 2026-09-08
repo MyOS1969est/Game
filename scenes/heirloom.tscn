@@ -4,7 +4,10 @@
 [sub_resource type="SphereShape3D" id="Shape_area"]
 radius = 1.8
 [sub_resource type="BoxShape3D" id="Shape_machine"]
-size = Vector3(1.2, 2.1, 0.85)
+size = Vector3(1.27, 2.16, 1.02)
+[sub_resource type="CapsuleShape3D" id="Shape_vessel"]
+radius = 0.18
+height = 1.24
 [node name="Heirloom" type="Area3D"]
 script = ExtResource("1_script")
 collision_layer = 0
@@ -14,7 +17,10 @@ position = Vector3(0, 0.9, 0)
 shape = SubResource("Shape_area")
 [node name="Body" type="StaticBody3D" parent="."]
 [node name="Collision" type="CollisionShape3D" parent="Body"]
-position = Vector3(0, 1.05, 0)
+position = Vector3(0, 1.08, 0)
 shape = SubResource("Shape_machine")
+[node name="VesselCollision" type="CollisionShape3D" parent="Body"]
+position = Vector3(-0.78, 1.02, -0.09)
+shape = SubResource("Shape_vessel")
 [node name="Visuals" type="Node3D" parent="."]
 script = ExtResource("2_art")

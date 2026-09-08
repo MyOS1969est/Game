@@ -26,7 +26,7 @@ Working palette: ivory `#d6cfb0`, stone `#a6a88b`, teal `#396b69`, deep blue-gre
 
 ## Asset list
 
-All entries below are **planned production assets**, not completed models. Quantities describe reusable source variants; scene instances may be repeated. P0 establishes the first material-and-lighting corner; P1 completes the target view; P2 adds final presentation detail.
+This table records the **target scope**, not a completion checklist. The first P0 implementation is tracked separately in [the dispenser corner guide](DISPENSER_CORNER.md); remaining entries are planned. Quantities describe reusable source variants; scene instances may be repeated. P0 establishes the first material-and-lighting corner; P1 completes the target view; P2 adds final presentation detail.
 
 | ID / priority | Asset and quantity | Position / purpose | Production route | Required deliverable |
 | --- | --- | --- | --- | --- |

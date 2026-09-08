@@ -76,14 +76,20 @@ func _run() -> void:
 	patrol_start = patrol.position
 	var paused_gait: float = rig.gait_phase
 	var paused_breeze: float = diorama.time
+	var leaf_material := preload("res://art/corner/materials.gd").get_material("Leaf") as ShaderMaterial
+	var paused_leaf_time: float = leaf_material.get_shader_parameter("breeze_time")
 	Input.action_press("move_right")
 	for frame in 12:
 		await process_frame
 	check(paused and player.position.is_equal_approx(start) and patrol.position.is_equal_approx(patrol_start), "Pause freezes both actors")
 	check(is_equal_approx(rig.gait_phase, paused_gait) and is_equal_approx(diorama.time, paused_breeze), "Pause freezes character and environmental animation")
+	check(is_equal_approx(paused_leaf_time, leaf_material.get_shader_parameter("breeze_time")), "Pause freezes shader-driven foliage")
 	Input.action_release("move_right")
 	await tap(KEY_ESCAPE)
 	check(not paused, "Escape resumes gameplay")
+	var vessel_ray := PhysicsRayQueryParameters3D.create(Vector3(-6.48, 1.0, 0.6), Vector3(-6.48, 1.0, -1.1), 1)
+	var vessel_hit := player.get_world_3d().direct_space_state.intersect_ray(vessel_ray)
+	check(not vessel_hit.is_empty() and vessel_hit.collider == heirloom.get_node("Body"), "Dispenser side vessel has physical collision")
 
 	player.position = Vector3(-5.7, 0.1, 1.1)
 	player.velocity = Vector3.ZERO
