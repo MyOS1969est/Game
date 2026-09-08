@@ -40,7 +40,8 @@ def main():
         screenshot.parent.mkdir(parents=True, exist_ok=True)
         if screenshot.exists():
             screenshot.unlink()
-        run(args.godot, ["--rendering-method", "gl_compatibility", "--fixed-fps", "60",
+        # Rendering checks run on CI machines without physical audio devices.
+        run(args.godot, ["--audio-driver", "Dummy", "--rendering-method", "gl_compatibility", "--fixed-fps", "60",
                         "--script", "res://tests/render_test.gd", "--", f"--screenshot={screenshot}"],
             "RENDER RESULT: PASS")
         if not screenshot.is_file() or screenshot.stat().st_size < 100:

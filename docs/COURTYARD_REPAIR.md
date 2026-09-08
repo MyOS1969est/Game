@@ -14,6 +14,6 @@ AFTERMARKET, the dispenser interpretation, and the specific room details retain 
 
 `tools/check_project.py` checks both process results and error output. The engine smoke test exercises actual input events, physics, inspection state, mutation eligibility, the panel's collision before and after opening, route traversal, pause, reset, and boundary containment.
 
-The optional render test refuses headless mode and captures the Godot viewport through a real rendering display. CI uses Xvfb with Mesa software OpenGL and preserves the screenshot as `courtyard-render`. This establishes that the scene renders on that Linux setup; the Windows editor and graphics driver still need a local play check.
+The optional render test refuses headless mode and captures the Godot viewport through a real rendering display. CI uses Xvfb with Mesa software OpenGL and preserves the screenshot as `courtyard-render`. The render check explicitly selects Godot's Dummy audio driver because CI has no physical sound device; it does not test audio. This establishes that the scene renders on that Linux setup; the Windows editor and graphics driver still need a local play check.
 
 Use a normal Godot project launch for play. `-s` / `--script` is for the dedicated SceneTree test scripts, never for a `.tscn` scene. Headless imports and gameplay tests do not establish graphical output.
