@@ -29,11 +29,11 @@ Meshes and materials are shared where possible. The project keeps the Compatibil
 
 ## Verification
 
-The gameplay test now includes 30 checks. In addition to the existing movement, physics, knowledge, route, pause, and reset checks, it verifies walking animation, paused animation, interaction focus, the dispenser's visible discovery state, the arm gesture, and return from that gesture.
+The gameplay test now includes 31 checks. In addition to the existing movement, physics, knowledge, route, pause, and reset checks, it verifies walking animation, paused animation, interaction focus, the dispenser's visible discovery state, the arm gesture, the hand reaching toward the panel, and return from that gesture.
 
 `python tools/check_project.py --godot godot --render --showcase` captures the normal courtyard, the traveler at close range, the completed objectives, and a sequence of real Godot motion frames. CI encodes the motion frames as an MP4 and uploads them with the three PNGs in `courtyard-render`. The motion study uses programmatic input and a close-up camera for art inspection; the game retains its fixed elevated camera.
 
-At initial publication, the 30 gameplay checks pass locally. Graphical inspection of this art pass is pending CI. The earlier repair's Windows play test remains a baseline result, not a Windows test of these new models and UI.
+The 31 gameplay checks pass locally. The first graphical review verified the full scene and UI and identified an arm gesture that swung in the wrong direction. Its joint rotation has been corrected and a directional reach check added; the final graphical capture is pending. The earlier repair's Windows play test remains a baseline result, not a Windows test of these new models and UI.
 
 ## Scope
 

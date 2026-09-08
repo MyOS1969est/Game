@@ -107,7 +107,12 @@ func _run() -> void:
 	player.can_shift_panels = true
 	await tap(KEY_E)
 	check(rig.reach_time > 0.0 and rig.heavy_reach, "Panel interaction triggers the altered-arm animation")
-	await frames(40)
+	await frames(20)
+	var toward_panel: Vector3 = panel.global_position - player.global_position
+	toward_panel.y = 0.0
+	var hand_tip: Vector3 = rig.forearm.to_global(Vector3(0, -0.37, -0.09))
+	check((hand_tip - rig.left_arm.global_position).dot(toward_panel.normalized()) > 0.3, "Altered hand reaches toward the interacted panel")
+	await frames(20)
 	check(panel.is_open and panel.get_node("Collision").disabled, "Mutation opens the route and removes its blocker")
 	hit = player.get_world_3d().direct_space_state.intersect_ray(ray)
 	check(hit.is_empty(), "Opened route is clear to physics")

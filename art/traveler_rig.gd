@@ -104,11 +104,11 @@ func _process(delta: float) -> void:
 	right_leg.rotation.x = -swing * 0.56
 	torso.position.y = 1.02 + absf(sin(gait_phase)) * stride_weight * 0.036 + sin(idle_time * 2.0) * 0.007
 	torso.rotation.z = swing * 0.024
-	left_arm.rotation.x = -swing * 0.27 - reach * (1.12 if heavy_reach else 0.60)
+	left_arm.rotation.x = -swing * 0.27 + reach * (1.12 if heavy_reach else 0.60)
 	left_arm.rotation.z = 0.10 + reach * 0.06
-	forearm.rotation.x = -reach * 0.28
-	right_arm.rotation.x = swing * 0.38 - reach * 0.18
+	forearm.rotation.x = reach * 0.28
+	right_arm.rotation.x = swing * 0.38 + reach * 0.18
 	scarf.rotation.x = sin(gait_phase - 0.4) * stride_weight * 0.10 + sin(idle_time * 1.9) * 0.028
 	head.position.y = 1.61 + absf(sin(gait_phase)) * stride_weight * 0.026
 	head.rotation.z = sin(idle_time * 1.2) * 0.018
-	head.rotation.x = reach * 0.10
+	head.rotation.x = -reach * 0.10
