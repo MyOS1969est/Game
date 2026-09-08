@@ -36,3 +36,9 @@ credentials.json
 *.pem
 
 # Git LFS pointer files are tracked separately via .gitattributes
+
+# Share the launcher tasks; keep other personal VS Code settings ignored.
+!.vscode/
+.vscode/*
+!.vscode/tasks.json
+__pycache__/

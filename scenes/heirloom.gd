@@ -1,7 +1,20 @@
 extends Area3D
 
-func _ready() -> void:
-    connect("body_entered", Callable(self, "_on_body_entered"))
+signal inspected
+var is_inspected: bool = false
+var condition: String = "Powered; feedstock empty"
+var learned_principle: String = ""
 
-func _on_body_entered(body) -> void:
-    print("Heirloom inspected by: ", body.name)
+func _ready() -> void:
+	add_to_group("interactables")
+
+func get_prompt() -> String:
+	return "E  Review dispenser" if is_inspected else "E  Inspect unidentified heirloom"
+
+func interact(_player: CharacterBody3D) -> String:
+	if is_inspected:
+		return "Condition: %s. Known principle: %s." % [condition, learned_principle]
+	is_inspected = true
+	learned_principle = "Pressurized foam expands to cushion parcels"
+	inspected.emit()
+	return "Notebook updated: parcel-cushioning dispenser.\n\"Please remain unpackaged until processing is complete.\""

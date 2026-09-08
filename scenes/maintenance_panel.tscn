@@ -1,0 +1,27 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://scenes/maintenance_panel.gd" id="1_script"]
+[sub_resource type="StandardMaterial3D" id="Mat_panel"]
+albedo_color = Color(0.23, 0.43, 0.43, 1)
+roughness = 0.75
+[sub_resource type="StandardMaterial3D" id="Mat_handle"]
+albedo_color = Color(0.94, 0.62, 0.17, 1)
+[sub_resource type="BoxMesh" id="Mesh_panel"]
+material = SubResource("Mat_panel")
+size = Vector3(2.25, 1.3, 0.4)
+[sub_resource type="BoxMesh" id="Mesh_handle"]
+material = SubResource("Mat_handle")
+size = Vector3(0.55, 0.16, 0.12)
+[sub_resource type="BoxShape3D" id="Shape_panel"]
+size = Vector3(2.25, 1.3, 0.4)
+[node name="MaintenancePanel" type="StaticBody3D"]
+script = ExtResource("1_script")
+[node name="Collision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.65, 0)
+shape = SubResource("Shape_panel")
+[node name="Visuals" type="Node3D" parent="."]
+[node name="Panel" type="MeshInstance3D" parent="Visuals"]
+position = Vector3(0, 0.65, 0)
+mesh = SubResource("Mesh_panel")
+[node name="Handle" type="MeshInstance3D" parent="Visuals"]
+position = Vector3(0, 0.75, 0.26)
+mesh = SubResource("Mesh_handle")

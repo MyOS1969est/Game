@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Play courtyard",
+      "type": "process",
+      "command": "godot",
+      "args": ["--path", "${workspaceFolder}"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Open Godot editor",
+      "type": "process",
+      "command": "godot",
+      "args": ["--path", "${workspaceFolder}", "--editor"],
+      "problemMatcher": []
+    }
+  ]
+}

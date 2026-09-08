@@ -1,9 +1,19 @@
-[gd_project]
-config_version=4
+; Engine configuration file. Edit through Godot when possible.
+config_version=5
 
 [application]
-name="MyGodotGame"
+config/name="AFTERMARKET — Service Courtyard"
 run/main_scene="res://main.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+
+[display]
+window/size/viewport_width=1280
+window/size/viewport_height=800
+window/size/window_width_override=1280
+window/size/window_height_override=800
+window/stretch/mode="canvas_items"
 
 [rendering]
-quality/driver="GLES3"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.12, 0.21, 0.22, 1)
