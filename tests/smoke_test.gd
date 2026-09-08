@@ -44,6 +44,8 @@ func _run() -> void:
 	var heirloom := game.get_node("Heirloom")
 	var panel := game.get_node("MaintenancePanel")
 	var camera := game.get_node("Camera") as Camera3D
+	var rig := player.get_node("Visuals")
+	var diorama := game.get_node("Courtyard/DioramaArt")
 	check(player.get_script() != null and patrol.get_script() != null and heirloom.get_script() != null, "Behavior scripts are attached")
 	check(player.is_on_floor() and player.position.y > -0.05, "Player rests on a solid floor")
 	check(patrol.is_on_floor(), "Patrol rests on a solid floor")
@@ -61,6 +63,7 @@ func _run() -> void:
 	var movement := player.position - start
 	check(movement.dot(camera.global_basis.x) > 0.8, "Movement follows camera right")
 	check(patrol.position.distance_to(patrol_start) > 0.1, "Patrol advances")
+	check(absf(rig.left_leg.rotation.x) > 0.04 and rig.stride_weight > 0.1, "Walking drives the traveler limb animation")
 	Input.action_press("move_right")
 	Input.action_press("move_forward")
 	await frames(2)
@@ -71,10 +74,13 @@ func _run() -> void:
 	await tap(KEY_ESCAPE)
 	start = player.position
 	patrol_start = patrol.position
+	var paused_gait: float = rig.gait_phase
+	var paused_breeze: float = diorama.time
 	Input.action_press("move_right")
 	for frame in 12:
 		await process_frame
 	check(paused and player.position.is_equal_approx(start) and patrol.position.is_equal_approx(patrol_start), "Pause freezes both actors")
+	check(is_equal_approx(rig.gait_phase, paused_gait) and is_equal_approx(diorama.time, paused_breeze), "Pause freezes character and environmental animation")
 	Input.action_release("move_right")
 	await tap(KEY_ESCAPE)
 	check(not paused, "Escape resumes gameplay")
@@ -82,10 +88,12 @@ func _run() -> void:
 	player.position = Vector3(-5.7, 0.1, 1.1)
 	player.velocity = Vector3.ZERO
 	await frames(4)
+	check(heirloom.get_node("Visuals").focus_ring.visible, "Nearby heirloom receives a visible focus cue")
 	await tap(KEY_E)
 	check(heirloom.is_inspected and not str(heirloom.learned_principle).is_empty(), "E inspection records knowledge")
 	check(heirloom.condition == "Powered; feedstock empty", "Inspection preserves separate device condition")
 	check("Notebook updated" in str(game.message_label.text), "Inspection gives visible feedback")
+	check(heirloom.get_node("Visuals").glyph.text == "✓", "Discovery updates the machine's visible state")
 
 	player.position = Vector3(-2.8, 0.1, -1.1)
 	player.velocity = Vector3.ZERO
@@ -98,10 +106,18 @@ func _run() -> void:
 	check(not panel.is_open, "Panel requires the bodily capability")
 	player.can_shift_panels = true
 	await tap(KEY_E)
-	await frames(40)
+	check(rig.reach_time > 0.0 and rig.heavy_reach, "Panel interaction triggers the altered-arm animation")
+	await frames(20)
+	var toward_panel: Vector3 = panel.global_position - player.global_position
+	toward_panel.y = 0.0
+	var hand_tip: Vector3 = rig.forearm.to_global(Vector3(0, -0.37, -0.09))
+	check((hand_tip - rig.left_arm.global_position).dot(toward_panel.normalized()) > 0.3, "Altered hand reaches toward the interacted panel")
+	await frames(20)
 	check(panel.is_open and panel.get_node("Collision").disabled, "Mutation opens the route and removes its blocker")
 	hit = player.get_world_3d().direct_space_state.intersect_ray(ray)
 	check(hit.is_empty(), "Opened route is clear to physics")
+	await frames(8)
+	check(rig.reach_time <= 0.001, "Interaction animation settles after the push")
 	# Use the player's unrotated movement fallback to walk straight through the tested gap.
 	player.camera = null
 	Input.action_press("move_forward")
