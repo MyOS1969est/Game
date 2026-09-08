@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=1 format=3 uid="scavenger-0001"]
 
 [ext_resource path="res://scenes/scavenger.gd" type="Script" id=1]
 
@@ -6,12 +6,12 @@
 script = ExtResource( 1 )
 transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2 )
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scavenger"]
+[node name="Mesh" type="MeshInstance3D" parent="Scavenger"]
 mesh = SphereMesh {
     radius = 0.5
 }
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Scavenger"]
+[node name="Collision" type="CollisionShape3D" parent="Scavenger"]
 shape = SphereShape3D {
     radius = 0.6
 }
