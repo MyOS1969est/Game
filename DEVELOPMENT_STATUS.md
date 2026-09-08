@@ -1,8 +1,8 @@
 # Development status
 
-## Milestone 3 — Blender dispenser corner (in verification)
+## Milestone 3 — Blender dispenser corner
 
-Status: 14 original Blender GLB modules have been exported and integrated with reusable Godot surface and foliage shaders. Godot 4.7.2 imports the kit and passes all 33 gameplay checks locally. Graphical review of this milestone is pending the CI render.
+Status: 14 original Blender GLB modules have been exported and integrated with reusable Godot surface and foliage shaders. Godot 4.7.2 imports the kit and passes all 33 gameplay checks locally and in [CI run 34256378074](https://github.com/MyOS1969est/Game/actions/runs/34256378074), testing runtime commit `17c1b360dbf20221e9e1e72c5a2e91db894333f2`. Four actual 1280x800 captures and a sampled inspection-motion frame were visually reviewed after correcting excess brightness, a disconnected branch and close-view occlusion. The 48-frame, 2.4-second clip is an inspection/foliage study.
 
 The first corner adds beveled wall panels and a fluted pillar, four irregular paving variants, a three-part dispenser with recessed hardware and hose, four modeled plant variants, baked vertex occlusion, procedural material detail, sky lighting/reflections, and contact-shadow settings. The normal fixed gameplay camera and both objectives remain the baseline. Windows hardware performance and local Blender rebuild still require owner review.
 

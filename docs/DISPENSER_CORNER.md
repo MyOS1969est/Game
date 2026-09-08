@@ -33,7 +33,7 @@ The helper looks on PATH and in the standard Blender Foundation installation dir
 
 The reproducible construction source is `tools/art/build_corner.py`. It is tested with Blender **4.5.13 LTS** in [the asset export run](https://github.com/MyOS1969est/Game/actions/runs/34253483464). Other installed versions have not been verified. The Windows helper has been reviewed but has not been executed on Windows here.
 
-To refine a mesh by hand, use Blender's **File > Import > glTF 2.0** and choose a file in `art/corner/models/`. Save your editable `.blend` in `art/corner/source/`. Export the selected asset as GLB with +Y up, normals, UVs and vertex colors preserved. Keep the existing root position, scale and material names. Each component of the dispenser has the same shared origin.
+To refine a mesh by hand, use Blender's **File > Import > glTF 2.0** and choose a file in `art/corner/models/`. Save your editable `.blend` in `art/corner/source/`. This source directory is excluded from Godot's import scan; Godot uses the exported GLBs in `models/`. Export the selected asset as GLB with +Y up, normals, UVs and vertex colors preserved. Keep the existing root position, scale and material names. Each component of the dispenser has the same shared origin.
 
 The generator rebuilds all GLBs and will overwrite manual edits to those export paths. Keep your edited `.blend` as the source of truth for a hand-refined asset and re-export it after a kit rebuild. Blender previews use simple assigned colors; final surface detail and animated leaves are Godot shaders.
 
@@ -57,7 +57,11 @@ python tools/check_project.py --godot "C:\path\to\Godot.exe" --render --corner-s
 
 The second command requires a graphical display. It captures the normal 1280x800 opening view, a separate close art-review view, the inspected machine, 48 real motion frames, and the normal view after both objectives complete. The close camera is a capture tool, not a change to normal gameplay. `--showcase` remains available separately for the previous traveler animation review.
 
-Current local result: import passes and all 33 engine behavior checks pass. The suite covers movement, collisions, inspection, independent knowledge/device condition, altered-arm panel use, route completion, pause, reset and animation. It adds vessel collision and shader-pause checks for this pass. Graphical CI review is pending.
+Verified result: import and all 33 engine behavior checks pass locally and in [CI run 34256378074](https://github.com/MyOS1969est/Game/actions/runs/34256378074), at runtime commit `17c1b360dbf20221e9e1e72c5a2e91db894333f2`. The suite covers movement, collisions, inspection, independent knowledge/device condition, altered-arm panel use, route completion, pause, reset and animation. It adds vessel collision and shader-pause checks for this pass.
+
+The same run rendered four real 1280x800 Godot stills and a 48-frame, 20 fps inspection/foliage study (2.4 seconds). All four stills and a sampled motion frame were inspected. The final review confirms retained paving/ceramic detail, a connected canopy branch, a clear dispenser face, the visible discovery checkmark and the completed route/HUD. The artifact archive's SHA-256 is `bd9656938bc3b7d44cc46ad7c04b989badd3b22cb799760579de71e9303d9eac` and was verified after download.
+
+Rendering used Linux Xvfb/Mesa llvmpipe with Compatibility and Dummy audio. This is graphical correctness evidence, not a reference-PC performance benchmark or sound test. Windows play/performance and the Windows Blender helper remain for owner review. The longer 20-30 second traversal clip in the full visual target brief is still a later milestone.
 
 ## Provenance and storage
 
