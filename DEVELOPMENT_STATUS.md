@@ -1,5 +1,11 @@
 # Development status
 
+## Next milestone — Courtyard production art target
+
+Status: a concept reference, matching asset list, and production brief have been prepared for the next visual milestone. The generated image sets a proposed art target; it is not an implemented or rendered Godot build. Production models, textures, skeletal animation, lighting changes, and hardware performance review remain to be done.
+
+See [Visual Target 01 and asset list](docs/COURTYARD_VISUAL_TARGET.md). Start with the dispenser corner to establish material quality and lighting, then integrate the traveler and complete the courtyard view. Preserve the verified gameplay while replacing its visual assets.
+
 ## Milestone 2 — Courtyard diorama art pass
 
 Status: original model kit, character/prop animation, scenery, and field-notebook UI implemented and verified in Godot 4.7.2 on Linux. All 31 gameplay/animation checks pass locally and in [CI run 34245560506](https://github.com/MyOS1969est/Game/actions/runs/34245560506). Three actual 1280×800 game captures and sampled motion frames were visually inspected, including the corrected forward push gesture. The new art build is ready for the owner's Windows play review.
