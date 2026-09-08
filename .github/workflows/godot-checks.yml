@@ -30,6 +30,7 @@ jobs:
       - name: Encode actual Godot motion frames
         run: ffmpeg -hide_banner -loglevel error -framerate 20 -i "$RUNNER_TEMP/courtyard-motion/frame%03d.png" -c:v libx264 -crf 20 -pix_fmt yuv420p "$RUNNER_TEMP/courtyard-motion.mp4"
       - name: Save rendered proof
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: courtyard-render

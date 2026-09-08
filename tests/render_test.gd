@@ -18,6 +18,8 @@ func capture(path: String) -> bool:
 	if error != OK:
 		push_error("Screenshot could not be saved: " + error_string(error))
 		return false
+	if not path.get_file().begins_with("frame"):
+		print("CAPTURED: ", path.get_file())
 	return true
 
 func _run() -> void:
@@ -61,6 +63,8 @@ func _run() -> void:
 		player.camera = null
 		Input.action_press("move_right")
 		for index in 75:
+			if index % 25 == 0:
+				print("MOTION: frame ", index, " / 75")
 			if index == 45:
 				Input.action_release("move_right")
 				player.play_interaction(player.position + Vector3.BACK, true)

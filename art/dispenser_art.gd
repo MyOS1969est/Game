@@ -59,4 +59,4 @@ func _process(delta: float) -> void:
 	time += delta
 	if focus_ring.visible:
 		focus_ring.scale = Vector3.ONE * (1.0 + sin(time * 3.0) * 0.025)
-	light.scale = Vector3.ONE * (1.0 + sin(time * 2.0) * 0.035)
+	light.scale = Vector3(0.17, 0.21, 0.17) * (1.0 + sin(time * 2.0) * 0.035)

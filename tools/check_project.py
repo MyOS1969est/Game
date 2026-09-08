@@ -10,14 +10,20 @@ ANSI = re.compile(r"\x1b\[[0-9;]*m")
 ERROR = re.compile(r"^(?:SCRIPT ERROR|ERROR):", re.MULTILINE)
 
 
-def run(engine, args, expected=None):
+def run(engine, args, expected=None, timeout=90):
     command = [engine, "--path", str(ROOT), *args]
     print("RUN:", subprocess.list2cmdline(command), flush=True)
     try:
         result = subprocess.run(command, cwd=ROOT, text=True, encoding="utf-8",
                                 errors="replace", stdout=subprocess.PIPE,
-                                stderr=subprocess.STDOUT, timeout=90)
-    except (OSError, subprocess.TimeoutExpired) as error:
+                                stderr=subprocess.STDOUT, timeout=timeout)
+    except subprocess.TimeoutExpired as error:
+        captured = error.stdout or b""
+        if isinstance(captured, bytes):
+            captured = captured.decode("utf-8", errors="replace")
+        print(ANSI.sub("", captured), flush=True)
+        raise SystemExit(f"Godot check exceeded its {timeout}-second limit; inspect captured output above.") from error
+    except OSError as error:
         raise SystemExit(f"Could not complete Godot check: {error}") from error
     output = ANSI.sub("", result.stdout)
     print(output, flush=True)
@@ -47,7 +53,7 @@ def main():
         run(args.godot, ["--audio-driver", "Dummy", "--rendering-method", "gl_compatibility", "--fixed-fps", "60",
                         "--script", "res://tests/render_test.gd", "--", f"--screenshot={screenshot}",
                         *(["--showcase"] if args.showcase else [])],
-            "RENDER RESULT: PASS")
+            "RENDER RESULT: PASS", timeout=240 if args.showcase else 90)
         if not screenshot.is_file() or screenshot.stat().st_size < 100:
             raise SystemExit("Godot reported rendering but did not create a screenshot.")
     print("ALL REQUESTED CHECKS PASSED")
