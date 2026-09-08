@@ -2,7 +2,7 @@
 
 ## Milestone 2 — Courtyard diorama art pass
 
-Status: original model kit, character/prop animation, scenery, and field-notebook UI implemented. Thirty-one gameplay/animation checks pass locally; final graphical art review is pending after correcting the direction of the push gesture.
+Status: original model kit, character/prop animation, scenery, and field-notebook UI implemented and verified in Godot 4.7.2 on Linux. All 31 gameplay/animation checks pass locally and in [CI run 34245560506](https://github.com/MyOS1969est/Game/actions/runs/34245560506). Three actual 1280×800 game captures and sampled motion frames were visually inspected, including the corrected forward push gesture. The new art build is ready for the owner's Windows play review.
 
 The art pass adds rounded ceramic ruins, an inlaid service seal, planted borders and trees, a detailed Bloomed traveler with walking and interaction animation, an articulated ceramic scavenger, refined interactive machines, and contextual focus cues. Models preview in the Godot editor through `@tool` scripts. The existing courtyard objectives and collision layout remain the gameplay baseline.
 

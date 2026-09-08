@@ -33,7 +33,9 @@ The gameplay test now includes 31 checks. In addition to the existing movement, 
 
 `python tools/check_project.py --godot godot --render --showcase` captures the normal courtyard, the traveler at close range, the completed objectives, and a sequence of real Godot motion frames. CI encodes the motion frames as an MP4 and uploads them with the three PNGs in `courtyard-render`. The motion study uses programmatic input and a close-up camera for art inspection; the game retains its fixed elevated camera.
 
-The 31 gameplay checks pass locally. The first graphical review verified the full scene and UI and identified an arm gesture that swung in the wrong direction. Its joint rotation has been corrected and a directional reach check added; the final graphical capture is pending. The earlier repair's Windows play test remains a baseline result, not a Windows test of these new models and UI.
+All 31 gameplay/animation checks pass locally and in [CI run 34245560506](https://github.com/MyOS1969est/Game/actions/runs/34245560506), using Godot 4.7.2 on Linux. That run verified code commit `5c46f4e36b5a891fe9ae6918c3dc9dab4ef189c0` and produced three actual 1280×800 game views plus a 75-frame motion clip. The [capture archive](https://github.com/MyOS1969est/Game/actions/runs/34245560506/artifacts/10063946922) was downloaded and its SHA-256 verified: `79e4dbf1a30b667a5cb2a8017ff816ccdf42e243728ae707ba8711d7d7330e7d`.
+
+Visual review confirmed the courtyard framing, readable interface, detailed traveler, and open-route completion view. Sampled motion frames confirmed walking and the corrected forward arm gesture; a directional reach check also protects that pose in the gameplay suite. The clip is an art inspection capture, not a performance benchmark. Rendering used Mesa software OpenGL and Dummy audio. The new models and interface are ready for the owner's Windows play review; the earlier repair's Windows play test applies to the baseline.
 
 ## Scope
 
