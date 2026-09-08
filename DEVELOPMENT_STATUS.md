@@ -22,7 +22,8 @@ Verification:
 - Godot 4.7.2 rendered a real 1280×800 frame under Xvfb/Mesa software OpenGL in [CI run 34238166864](https://github.com/MyOS1969est/Game/actions/runs/34238166864). The screenshot was downloaded, its archive checksum verified, and the image visually inspected.
 - The rendered review confirmed courtyard framing, visible actors and scenery, readable HUD text, and corrected lighting/world-label sizing. The `courtyard-render` artifact is attached to the run.
 - Rendering checks use Dummy audio and do not verify sound. This workspace still disallows local graphical display sockets; rendering was verified on the Linux CI runner.
-- Windows hardware and the owner's local editor session require a local play check.
+- The owner's September 8, 2026 screenshot confirms the repaired courtyard renders in a local Windows Godot debug session. The elevated camera, actors, scenery, lighting, world labels, and HUD are visible.
+- Owner confirmation of movement, inspection, panel opening, route completion, pause/resume, and reset on Windows is still pending. A still image does not verify those interactions or performance.
 
 Next:
 - Review the playable camera, controls, and route with the owner.
