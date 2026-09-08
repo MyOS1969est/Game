@@ -1,0 +1,36 @@
+name: Build original corner models
+
+on:
+  push:
+    paths:
+      - tools/art/build_corner.py
+      - .github/workflows/corner-models.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export-models:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Blender runtime dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends libx11-6 libxi6 libxxf86vm1 libxfixes3 libxrender1 libxkbcommon0 libgl1 libegl1
+      - name: Download verified Blender 4.5.13
+        run: |
+          curl --fail --location --retry 3 --silent --show-error https://download.blender.org/release/Blender4.5/blender-4.5.13-linux-x64.tar.xz -o "$RUNNER_TEMP/blender.tar.xz"
+          echo "da4e69b06b75b9e642d106496c50e7e240218b411d2f6e18271c1d1d819cef91  $RUNNER_TEMP/blender.tar.xz" | sha256sum --check
+          tar -xJf "$RUNNER_TEMP/blender.tar.xz" -C "$RUNNER_TEMP"
+      - name: Export original models with UVs and vertex occlusion
+        run: "$RUNNER_TEMP/blender-4.5.13-linux-x64/blender --background --factory-startup --python-exit-code 1 --python tools/art/build_corner.py"
+      - name: Save model exports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: original-corner-models
+          path: art/corner/models/
+          if-no-files-found: error

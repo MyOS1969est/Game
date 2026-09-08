@@ -1,9 +1,6 @@
-# Example Git LFS attributes
-# Track common large asset types when using Git LFS
-*.png filter=lfs diff=lfs merge=lfs -text
-*.jpg filter=lfs diff=lfs merge=lfs -text
-*.webp filter=lfs diff=lfs merge=lfs -text
-*.wav filter=lfs diff=lfs merge=lfs -text
-*.mp3 filter=lfs diff=lfs merge=lfs -text
-*.ogg filter=lfs diff=lfs merge=lfs -text
-*.zip filter=lfs diff=lfs merge=lfs -text
+# Editable binary art projects and high-dynamic-range textures belong in LFS.
+# The checked-in GLB modules are deliberately small; their editable source is
+# tools/art/build_corner.py. Larger exports must be moved to LFS before commit.
+*.blend filter=lfs diff=lfs merge=lfs -text
+*.exr filter=lfs diff=lfs merge=lfs -text
+*.psd filter=lfs diff=lfs merge=lfs -text
