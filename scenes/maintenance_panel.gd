@@ -16,7 +16,11 @@ func interact(player: CharacterBody3D) -> String:
 	if not player.get("can_shift_panels"):
 		return "The panel needs more leverage. Your altered arm can provide it."
 	is_open = true
+	$Visuals.mark_open()
 	$Collision.set_deferred("disabled", true)
 	create_tween().tween_property($Visuals, "position:x", 2.4, 0.55).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	opened.emit()
 	return "Side route opened.\n\"Panel relocated. Paperwork remains in its original position.\""
+
+func set_focused(value: bool) -> void:
+	$Visuals.set_focused(value and not is_open)

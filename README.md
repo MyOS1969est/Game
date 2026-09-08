@@ -51,4 +51,6 @@ The first command imports resources and runs the engine gameplay tests. It fails
 
 GitHub Actions runs both checks with software OpenGL and uploads `courtyard-render`. Headless checks establish loading and gameplay behavior; they cannot establish graphical output.
 
-See [development status](DEVELOPMENT_STATUS.md) and [repair details](docs/COURTYARD_REPAIR.md).
+For a full art capture (three views and motion frames), use `python tools/check_project.py --godot godot --render --showcase`. CI also encodes the motion frames into an MP4.
+
+See [development status](DEVELOPMENT_STATUS.md), [repair details](docs/COURTYARD_REPAIR.md), and the [diorama art editing guide](docs/DIORAMA_ART_PASS.md).

@@ -33,3 +33,9 @@ func _physics_process(delta: float) -> void:
 	if direction.length_squared() > 0.001:
 		var target_angle := atan2(-direction.x, -direction.z)
 		$Visuals.rotation.y = lerp_angle($Visuals.rotation.y, target_angle, minf(turn_speed * delta, 1.0))
+
+func play_interaction(target: Vector3, heavy: bool = false) -> void:
+	var direction := target - global_position
+	if direction.length_squared() > 0.01:
+		$Visuals.rotation.y = atan2(-direction.x, -direction.z)
+	$Visuals.perform_interaction(heavy)

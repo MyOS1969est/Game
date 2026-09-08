@@ -24,12 +24,16 @@ jobs:
       - name: Install software display
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri libglx-mesa0
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgl1-mesa-dri libglx-mesa0 ffmpeg
       - name: Import, test gameplay, and render
-        run: xvfb-run -a -s '-screen 0 1280x800x24 -nolisten tcp' env LIBGL_ALWAYS_SOFTWARE=1 python3 tools/check_project.py --render --screenshot "$RUNNER_TEMP/courtyard.png"
+        run: xvfb-run -a -s '-screen 0 1280x800x24 -nolisten tcp' env LIBGL_ALWAYS_SOFTWARE=1 python3 tools/check_project.py --render --showcase --screenshot "$RUNNER_TEMP/courtyard.png"
+      - name: Encode actual Godot motion frames
+        run: ffmpeg -hide_banner -loglevel error -framerate 20 -i "$RUNNER_TEMP/courtyard-motion/frame%03d.png" -c:v libx264 -crf 20 -pix_fmt yuv420p "$RUNNER_TEMP/courtyard-motion.mp4"
       - name: Save rendered proof
         uses: actions/upload-artifact@v4
         with:
           name: courtyard-render
-          path: ${{ runner.temp }}/courtyard.png
+          path: |
+            ${{ runner.temp }}/courtyard*.png
+            ${{ runner.temp }}/courtyard-motion.mp4
           if-no-files-found: error

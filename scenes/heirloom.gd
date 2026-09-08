@@ -16,5 +16,9 @@ func interact(_player: CharacterBody3D) -> String:
 		return "Condition: %s. Known principle: %s." % [condition, learned_principle]
 	is_inspected = true
 	learned_principle = "Pressurized foam expands to cushion parcels"
+	$Visuals.record_discovery()
 	inspected.emit()
 	return "Notebook updated: parcel-cushioning dispenser.\n\"Please remain unpackaged until processing is complete.\""
+
+func set_focused(value: bool) -> void:
+	$Visuals.set_focused(value)
