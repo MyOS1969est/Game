@@ -20,4 +20,6 @@ On September 8, 2026, [CI run 34238166864](https://github.com/MyOS1969est/Game/a
 
 Use a normal Godot project launch for play. `-s` / `--script` is for the dedicated SceneTree test scripts, never for a `.tscn` scene. Headless imports and gameplay tests do not establish graphical output.
 
-The owner subsequently supplied a screenshot on September 8, 2026 showing the repaired scene running in a Windows Godot debug window. Visual review confirmed the courtyard, elevated camera, actors, scenery, lighting, world labels, and HUD render locally. This closes the Windows rendering check. Owner confirmation of movement, inspection, panel opening, route completion, pause/resume, and reset remains pending; the still image does not establish interactive behavior, performance, or audio.
+The owner subsequently supplied a screenshot on September 8, 2026 showing the repaired scene running in a Windows Godot debug window. Visual review confirmed the courtyard, elevated camera, actors, scenery, lighting, world labels, and HUD render locally. This closes the Windows rendering check.
+
+After completing the requested local play checklist, the owner confirmed that movement, dispenser inspection and notebook update, panel opening, side-route completion, pause/resume, and reset all work on Windows. This completes the courtyard repair's local interaction verification. The checklist did not include performance benchmarking or audio testing.

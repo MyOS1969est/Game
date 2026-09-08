@@ -2,6 +2,8 @@
 
 ## Milestone 1 — Service courtyard repair
 
+Status: verified by automated checks and the owner's Windows play test on September 8, 2026.
+
 Implemented:
 - Valid Godot 4 project and scene resources.
 - Fixed elevated orthographic camera aimed at the courtyard.
@@ -23,10 +25,9 @@ Verification:
 - The rendered review confirmed courtyard framing, visible actors and scenery, readable HUD text, and corrected lighting/world-label sizing. The `courtyard-render` artifact is attached to the run.
 - Rendering checks use Dummy audio and do not verify sound. This workspace still disallows local graphical display sockets; rendering was verified on the Linux CI runner.
 - The owner's September 8, 2026 screenshot confirms the repaired courtyard renders in a local Windows Godot debug session. The elevated camera, actors, scenery, lighting, world labels, and HUD are visible.
-- Owner confirmation of movement, inspection, panel opening, route completion, pause/resume, and reset on Windows is still pending. A still image does not verify those interactions or performance.
+- After the screenshot review, the owner confirmed the Windows play checklist: movement, dispenser inspection and notebook update, panel opening, side-route completion, pause/resume, and reset all work. This completes the courtyard repair's local play check; performance benchmarking and audio were outside that checklist.
 
 Next:
-- Review the playable camera, controls, and route with the owner.
 - Develop a consistent original model/animation kit toward the approved clean diorama art.
 - Begin the small expedition/extraction/settlement milestone after play feedback.
 
