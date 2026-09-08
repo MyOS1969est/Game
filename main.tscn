@@ -11,6 +11,18 @@ mesh = PlaneMesh {
 }
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -12 )
+current = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 1
+
+[node name="Label" type="Label" parent="HUD"]
+text = "Use WASD or arrow keys to move. Approach the box to 'inspect'."
+anchor_right = 1.0
+margin_right = 0
+margin_top = 10
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 
