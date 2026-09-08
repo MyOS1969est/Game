@@ -21,4 +21,4 @@ func _physics_process(delta: float) -> void:
     velocity.z = input_dir.z
     velocity.y -= 9.8 * delta
 
-    velocity = move_and_slide()
+    move_and_slide()

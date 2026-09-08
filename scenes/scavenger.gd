@@ -23,10 +23,10 @@ func _physics_process(delta: float) -> void:
         velocity.x = move.x
         velocity.z = move.z
         velocity.y -= 9.8 * delta
-        velocity = move_and_slide()
+        move_and_slide()
 
         # rotate to face movement direction smoothly using yaw lerp
         var target_angle = atan2(-move.x, -move.z)
         rotation.y = lerp_angle(rotation.y, target_angle, clamp(8.0 * delta, 0, 1))
     else:
-        velocity = move_and_slide()
+        move_and_slide()
