@@ -201,10 +201,10 @@ func _dispenser_border() -> void:
 	Kit.box(self, Vector3(-8.09, 0.13, -1.11), Vector3(0.73, 0.26, 1.13), Kit.STONE, 0.085).material_override = Materials.get_material("Stone")
 	Models.place(self, "fern_02", Vector3(-8.09, 0.26, -1.11), Vector3.ONE * 0.78)
 	# A small upper-left branch produces real dappled shadows at the dispenser.
-	var branch := Kit.node(self, "ServiceCanopy", Vector3(-8.9, 3.85, -0.8))
-	Kit.rod(branch, Vector3.ZERO, Vector3(1.45, 0.40, -0.70), 0.085, Color("#61563e"), 0.035).material_override = Materials.get_material("Bark")
+	var branch := Kit.node(self, "ServiceCanopy", Vector3(-7.36, 2.75, -5.80))
+	Kit.rod(branch, Vector3.ZERO, Vector3(0.35, 0.80, 3.30), 0.12, Color("#61563e"), 0.045).material_override = Materials.get_material("Bark")
 	for i in 6:
-		var at := Vector3(float(i) * 0.27, 0.20 + float(i) * 0.045, -0.1 - float(i % 3) * 0.26)
+		var at := Vector3(0.14 + float(i) * 0.04, 0.32 + float(i) * 0.09, 1.30 + float(i) * 0.37)
 		Models.place(branch, "broadleaf_01", at, Vector3.ONE * 0.85, float(i) * 2.399)
 
 	# Fine scattered leaves and roots suggest growth without coating every tile.

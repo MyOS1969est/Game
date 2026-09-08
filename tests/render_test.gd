@@ -57,7 +57,7 @@ func _run() -> void:
 		var subject := Vector3(-6.35, 1.10, -0.75)
 		camera.position = subject + Vector3(3.5, 3.0, 6.0)
 		camera.look_at(subject)
-		player.position = Vector3(-4.85, 0.1, 0.85)
+		player.position = Vector3(-4.25, 0.1, -0.05)
 		player.velocity = Vector3.ZERO
 		await frames(8)
 		if not await capture(output.get_basename() + "-corner.png"):
