@@ -18,8 +18,10 @@ Implemented:
 
 Verification:
 - Godot 4.7.2 official Linux editor imported the repaired project without errors.
-- All 24 engine gameplay checks passed locally.
-- Rendered-frame verification is pending: this workspace disallows graphical display sockets. The GitHub workflow is ready to run after the repair branch is published with owner authorization.
+- All 24 engine gameplay checks passed locally and in GitHub Actions.
+- Godot 4.7.2 rendered a real 1280×800 frame under Xvfb/Mesa software OpenGL in [CI run 34238166864](https://github.com/MyOS1969est/Game/actions/runs/34238166864). The screenshot was downloaded, its archive checksum verified, and the image visually inspected.
+- The rendered review confirmed courtyard framing, visible actors and scenery, readable HUD text, and corrected lighting/world-label sizing. The `courtyard-render` artifact is attached to the run.
+- Rendering checks use Dummy audio and do not verify sound. This workspace still disallows local graphical display sockets; rendering was verified on the Linux CI runner.
 - Windows hardware and the owner's local editor session require a local play check.
 
 Next:
