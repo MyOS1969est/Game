@@ -19,7 +19,7 @@ background_mode = 1
 background_color = Color(0.16, 0.26, 0.27, 1)
 ambient_light_source = 3
 ambient_light_color = Color(0.72, 0.84, 0.87, 1)
-ambient_light_energy = 0.65
+ambient_light_energy = 0.4
 reflected_light_source = 2
 tonemap_mode = 0
 [sub_resource type="BoxShape3D" id="Shape_route"]
@@ -36,8 +36,8 @@ mesh = SubResource("Mesh_floor")
 shape = SubResource("Shape_floor")
 [node name="Sun" type="DirectionalLight3D" parent="."]
 rotation_degrees = Vector3(-52, -32, 0)
-light_color = Color(1, 0.92, 0.76, 1)
-light_energy = 1.25
+light_color = Color(1, 0.95, 0.86, 1)
+light_energy = 0.8
 shadow_enabled = true
 directional_shadow_max_distance = 60.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
