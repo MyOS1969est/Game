@@ -1,9 +1,6 @@
 [gd_scene load_steps=1 format=3 uid="scavenger-0001"]
 
-[ext_resource path="res://scenes/scavenger.gd" type="Script" id=1]
-
 [node name="Scavenger" type="CharacterBody3D"]
-script = ExtResource( 1 )
 transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2 )
 
 [node name="Mesh" type="MeshInstance3D" parent="Scavenger"]
