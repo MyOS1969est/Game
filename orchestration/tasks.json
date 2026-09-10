@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "tasks": [
+    {
+      "id": "AF-001",
+      "title": "Discover and complete the existing local art toolchain",
+      "kind": "setup",
+      "preferred_provider": "codex",
+      "fallback_provider": null,
+      "depends_on": [],
+      "status": "queued",
+      "evidence": [],
+      "instructions": "Inspect the actual active Windows project, installed tools, recent changes, and any completed work before installing or rebuilding anything. Reuse tools/art/build_corner.ps1, tools/art/build_corner.py and tools/check_project.py. Locate Python, Blender, Godot, Git, Codex CLI, Claude Code and Grok Build if present. Verify versions and provider subscription authentication without printing credentials. Use existing local Codex directly if its CLI is absent; do not recursively launch another Codex from the controller. Install a missing free CLI only when needed for its assigned task, using its official supported installer and existing subscription login. Do not upgrade functioning Godot or Blender as part of setup. Verify a small Blender export in an isolated sample location and its import in Godot. Detect C:\\dev\\GameAssetInbox and any already downloaded packs. Write a concise environment and actual verification report. Record sign-in, OS approval, account eligibility or quota failures precisely, continue independent work, and use permitted fallback rather than sending Dan installation instructions. Do not purchase anything, enable extra usage or configure paid API credentials.",
+      "acceptance_criteria": [
+        "Actual tool locations and versions are recorded, with local Windows results distinguished from cloud checks.",
+        "A Blender-created sample exports successfully and loads in Godot, or a concrete blocker and captured error are recorded.",
+        "Each provider is classified as subscription authenticated, unavailable, or requiring a specific access step; no secrets are stored.",
+        "Existing art scripts, downloaded packs and uncommitted work are preserved and reused."
+      ]
+    },
+    {
+      "id": "AF-002",
+      "title": "Turn the three visual references into a focused art brief",
+      "kind": "research",
+      "preferred_provider": "grok",
+      "fallback_provider": "codex",
+      "depends_on": [],
+      "status": "done",
+      "evidence": [
+        "docs/ART_DIRECTION_NEXT.md"
+      ],
+      "instructions": "Reuse docs/ART_DIRECTION_NEXT.md if it already meets this brief; do not spend a Grok turn repeating completed work. Delegate only a concrete unanswered research or design question. Prepare a short, sourced art brief for AFTERMARKET using Dan's selected references: Death's Door for clear silhouettes and scene framing, DREDGE for restrained color and atmosphere, For the King for appealing proportions and simple geometry. Treat these as proposed artistic interpretations, not claims about the original games' implementation or asset purchases. Retain AFTERMARKET's cream ceramic, teal technology, brass accents, botanical overgrowth and humorous science-fantasy identity. Review docs/ART_DIRECTION_NEXT.md and the existing courtyard screenshots when available. Define a small service-machine corner, five material/color rules, camera-distance readability checks, and a list of elements to customize. Use official sources when researching current asset information. Grok supplies research or creative alternatives and does not modify the project; the local Codex controller saves and integrates the result. If Grok's account or CLI is unavailable, perform the bounded research with available Codex tools and name the actual provider.",
+      "acceptance_criteria": [
+        "A concise reference brief maps each selected reference to concrete choices for AFTERMARKET.",
+        "Recommendations fit one courtyard corner and the approved free asset budget.",
+        "Factual source claims include direct links; interpretations and unverified assumptions are labeled.",
+        "The result identifies the actual provider and is saved in a project evidence file."
+      ],
+      "summary": "Codex authored and reviewed the existing reference brief while building orchestration. It covers the initial criteria; no Grok invocation was made or needed. Reopen only for a specific unanswered question."
+    },
+    {
+      "id": "AF-003",
+      "title": "Acquire and prepare the approved free asset packs",
+      "kind": "assets",
+      "preferred_provider": "codex",
+      "fallback_provider": null,
+      "depends_on": [],
+      "status": "queued",
+      "evidence": [],
+      "instructions": "Inspect existing downloads first. Obtain the free editions of KayKit Dungeon Pack (https://kaylousberg.itch.io/kaykit-dungeon-pack), KayKit Forest Nature Pack (https://kaylousberg.itch.io/kaykit-forest), and Quaternius Sci-Fi Essentials Kit Standard (https://quaternius.itch.io/sci-fi-essentials-kit). All were approved in chat as free CC0 building blocks; recheck the selected download's license and content. Use supported direct downloads or browser tools, not scraping around an access restriction. If a download is blocked, try an official creator mirror and continue with available assets; ask Dan for one exact click only when genuinely required. Extract and inventory assets, keep originals, preserve glTF/bin/texture dependencies, record creator/source/license/download date and archive hash. Stage large archives outside the Godot project. Bring only a small useful selection into project conventions. Download and inventory work can proceed independently of Blender setup or secondary-provider authentication. Godot import verification belongs to AF-004. Follow AGENTS.md and existing Git LFS rules for binary assets. Install Krita from its official free Windows distribution only if image editing is needed and it is absent; reuse a suitable installed editor otherwise. Do not buy Extra/Pro/Source editions or add subscriptions.",
+      "acceptance_criteria": [
+        "Available free pack downloads are inventoried with exact source, edition, license and hashes.",
+        "Selected models retain all referenced mesh/texture files; inventory identifies the files and formats to verify in Godot during AF-004.",
+        "Original downloads are preserved; large archives and editor caches are not accidentally committed.",
+        "Any inaccessible download has an actual attempted-access record and a workable fallback."
+      ]
+    },
+    {
+      "id": "AF-004",
+      "title": "Build and verify one courtyard corner using authored assets",
+      "kind": "implementation",
+      "preferred_provider": "codex",
+      "fallback_provider": null,
+      "depends_on": [
+        "AF-001",
+        "AF-002",
+        "AF-003"
+      ],
+      "status": "queued",
+      "evidence": [],
+      "instructions": "Build a separate art-test scene containing a small floor area, doorway, two wall sections, two vegetation types, rocks, the existing player for scale and one technology prop adapted toward our service-machine design. Apply the reference brief and use authored asset geometry with coherent materials; another all-primitive pass does not fulfill this task. Reuse functioning gameplay, the established Blender pipeline and the current Godot renderer. Preserve and inspect current local edits; use an isolated Git worktree when needed rather than asking Dan to move or stash files. Save editable sources in the existing source conventions and export reusable GLB assets. Run tools/check_project.py with the detected Godot executable for gameplay changes, and render/inspect actual Godot output when available. Report performance measurement conditions, not invented hardware results. Update project status with actual evidence. Capture a real gameplay image of the new test scene, distinct from concept art and Blender renders. Do not expand to the full courtyard before the small corner has been reviewed.",
+      "acceptance_criteria": [
+        "The art-test scene runs with a readable player, route and interaction area at the gameplay camera distance.",
+        "Materials, scale, texture dependencies and relevant collision shapes have been checked.",
+        "Existing required Godot checks pass, with commands and outputs retained.",
+        "An actual Godot image of the new scene has been inspected; keep the task in review or blocked if graphical verification cannot run, and do not expand the art pass.",
+        "The change is isolated and reviewable, with editable sources and license records."
+      ]
+    },
+    {
+      "id": "AF-005",
+      "title": "Review the art integration and route remaining fixes",
+      "kind": "review",
+      "preferred_provider": "claude",
+      "fallback_provider": "codex",
+      "depends_on": [
+        "AF-004"
+      ],
+      "status": "queued",
+      "evidence": [],
+      "instructions": "Independently review the art-test diff, asset provenance, import settings, render evidence and test output. The local controller must supply a saved diff and relevant context so the reviewer can use read-only tools. Look for missing dependencies, incorrect scale or pivots, excessive texture/model cost, visual inconsistency, unsupported renderer features, broken interactions and overstated verification. Separate confirmed defects from artistic suggestions. Claude does not edit the same project files as Codex. Return specific findings and a disposition; the controller saves the review and creates bounded Codex fix tasks for actionable defects, then rechecks affected behavior. If Claude is unavailable, use an explicitly labeled separate Codex review, not a fabricated Claude result. Ask Dan only for unresolved visual direction or play-feel decisions, with the actual scene already prepared and launched or with its result linked.",
+      "acceptance_criteria": [
+        "A review artifact names the reviewer actually used and cites concrete files or evidence for findings.",
+        "Actionable defects become owned fix tasks with acceptance criteria; no unresolved failure is presented as accepted.",
+        "The report distinguishes automated checks, visual inspection and Dan's remaining taste/play decisions."
+      ]
+    }
+  ]
+}

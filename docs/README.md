@@ -1,5 +1,9 @@
 # Project documentation
 
+- [Orchestration agreement](ORCHESTRATION.md): agent ownership, executable task queue, subscription dispatch and evidence requirements.
+- [Orchestration validation](ORCHESTRATION_VALIDATION.md): tested behavior, CI coverage and remaining local activation checks.
+- [Next art direction](ART_DIRECTION_NEXT.md): the Death's Door / DREDGE / For the King reference blend and approved free asset packs.
+
 - [Blender dispenser corner](DISPENSER_CORNER.md): implemented model kit, material controls, Windows Blender workflow, and verification scope.
 - [Courtyard visual target and asset list](COURTYARD_VISUAL_TARGET.md): proposed production art, asset handoff, build order, and review criteria.
 - [Visual target generation prompt](COURTYARD_VISUAL_TARGET_PROMPT.txt): the reproducible base prompt and targeted refinement used for the companion concept.

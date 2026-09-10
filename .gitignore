@@ -42,3 +42,6 @@ credentials.json
 .vscode/*
 !.vscode/tasks.json
 __pycache__/
+
+# Local worker prompts, transcripts, locks and temporary provider results.
+/.orchestration/
