@@ -5,14 +5,60 @@
       "label": "Play courtyard",
       "type": "process",
       "command": "godot",
-      "args": ["--path", "${workspaceFolder}"],
+      "args": [
+        "--path",
+        "${workspaceFolder}"
+      ],
       "problemMatcher": []
     },
     {
       "label": "Open Godot editor",
       "type": "process",
       "command": "godot",
-      "args": ["--path", "${workspaceFolder}", "--editor"],
+      "args": [
+        "--path",
+        "${workspaceFolder}",
+        "--editor"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Orchestration: status",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/tools/orchestrate.py",
+        "status"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Orchestration: local capabilities",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/tools/orchestrate.py",
+        "doctor"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Orchestration: next task",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/tools/orchestrate.py",
+        "next"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
       "problemMatcher": []
     }
   ]

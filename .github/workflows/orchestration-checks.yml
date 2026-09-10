@@ -1,0 +1,37 @@
+name: Orchestration checks
+
+on:
+  push:
+    paths:
+      - 'tools/orchestrate.py'
+      - 'tools/orchestrate.ps1'
+      - 'tests/test_orchestration.py'
+      - 'orchestration/**'
+      - '.github/workflows/orchestration-checks.yml'
+  pull_request:
+    paths:
+      - 'tools/orchestrate.py'
+      - 'tools/orchestrate.ps1'
+      - 'tests/test_orchestration.py'
+      - 'orchestration/**'
+      - '.github/workflows/orchestration-checks.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test-dispatcher:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test routing and failure handling without AI calls
+        run: python -m unittest discover -s tests -p "test_orchestration.py" -v
+      - name: Validate the tracked queue
+        run: python tools/orchestrate.py status --json

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "allow_paid_api": false,
+  "timeout_seconds": 1200,
+  "max_turns": 12,
+  "providers": {
+    "codex": { "executable": "codex", "enabled": true },
+    "claude": { "executable": "claude", "enabled": true },
+    "grok": { "executable": "grok", "enabled": true }
+  },
+  "task_types": {
+    "setup": { "provider": "codex", "writable": true },
+    "assets": { "provider": "codex", "writable": true },
+    "implementation": { "provider": "codex", "writable": true },
+    "fix": { "provider": "codex", "writable": true },
+    "review": { "provider": "claude", "writable": false },
+    "research": { "provider": "grok", "writable": false },
+    "design": { "provider": "codex", "writable": false }
+  }
+}

@@ -2,6 +2,10 @@
 
 A small Godot 4.7.2 prototype with a fixed elevated 3D camera, a mutated scavenger, an inspectable heirloom, a moving patrol, and a mutation-operated side route.
 
+## Delegate project work
+
+Agents should read [the orchestration agreement](docs/ORCHESTRATION.md) and [the task queue](orchestration/tasks.json). Dan sets outcomes; local Codex handles implementation, Claude reviews, and Grok supports research using existing subscriptions. Check the queue with `python tools/orchestrate.py status` and local capabilities with `python tools/orchestrate.py doctor`. The local controller owns execution and verification; a manual setup checklist is not the default handoff.
+
 ## Play in Godot
 
 1. Install the **standard Godot 4.7.2 editor** (the project uses GDScript).

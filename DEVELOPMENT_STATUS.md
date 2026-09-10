@@ -1,5 +1,13 @@
 # Development status
 
+## Engineering — AI orchestration
+
+Status: a local task dispatcher, persistent operating agreement, provider routing, evidence records and a five-task art queue are implemented. All 31 fake-provider tests pass in the Linux authoring environment. A dedicated workflow runs the same suite on Windows and Linux; actual CI results should be checked on the published branch.
+
+Codex owns implementation; Claude Code provides independent reviews and Grok Build supports bounded research when existing subscription access is verified. The reference brief is already complete and will be reused. Routine technical work belongs to the agents; Dan supplies creative decisions and genuinely required account/OS interaction. Local Windows enrollment and real subscriber CLI execution remain unverified until the local controller runs them.
+
+See [the operating agreement](docs/ORCHESTRATION.md), [validation scope](docs/ORCHESTRATION_VALIDATION.md), and [the task queue](orchestration/tasks.json).
+
 ## Milestone 3 — Blender dispenser corner
 
 Status: 14 original Blender GLB modules have been exported and integrated with reusable Godot surface and foliage shaders. Godot 4.7.2 imports the kit and passes all 33 gameplay checks locally and in [CI run 34256378074](https://github.com/MyOS1969est/Game/actions/runs/34256378074), testing runtime commit `17c1b360dbf20221e9e1e72c5a2e91db894333f2`. Four actual 1280x800 captures and a sampled inspection-motion frame were visually reviewed after correcting excess brightness, a disconnected branch and close-view occlusion. The 48-frame, 2.4-second clip is an inspection/foliage study.
